@@ -1,0 +1,192 @@
+<html>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addDeviceModal"> Add Device </button>
+<body>
+
+<table id="example" class="display" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>Country</th>
+                <th>Project</th>
+                <th>IP</th>
+                <th>Type</th>
+                <th>Access</th>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Enable</th>
+                <th>Backup</th>
+                <th>Description</th>
+                <th>DMVPN</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>Country</th>
+                <th>Project</th>
+                <th>IP</th>
+                <th>Type</th>
+                <th>Access</th>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Enable</th>
+                <th>Backup</th>
+                <th>Description</th>
+                <th>DMVPN</th>
+            </tr>
+        </tfoot>
+        <tbody>
+        {% for e in result %}
+            <tr class="rows">
+
+                            <td class = "country"> {{e.country}}</td>
+                            <td class = "project">{{e.project}}</td>
+                            <td class = "ip">{{e.ip}}</td>
+                            <td class = "type">{{e.type}}</td>
+                            <td class = "access">{{e.access}}</td>
+                            <td class = "username">{{e.username}}</td>
+                            <td class = "password">{{e.password}}</td>
+                            <td class = "enable">{{e.enable}}</td>
+                            <td class = "backedup">{{e.backedup}}</td>
+                            <td class = "description">{{e.description}}</td>
+                            <td class = "dmvpn">{{e.dmvpn}}</td>
+
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+
+<!-- Modal -->
+<!-- Things to do:
+1) Validators
+2) Check Submission at server level
+
+-->
+
+        <div class="modal fade" id="addDeviceModal" tabindex="-1" role="dialog" aria-labelledby="addDeviceModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="addDeviceModalLabel"> Add Device</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                  <form id="add-device-form" class="form-horizontal">
+                        <div class="form-group row">   
+                            <label for="add-country" class="col-sm-2 control-label" >Country</label>
+                            <!--<input type="text" name="Country" id="add-country" value="Something" >-->
+                            <div class="col-sm-10">
+                                <select id="add-country" name="country" class="form-control" >  
+                                    <option>AE</option> 
+                                    <option>DZ</option> 
+                                    <option>QA</option> 
+                                    <option>LB</option> 
+                                    <option>SA</option> 
+                                    <option>KW</option> 
+                                    <option>KZ</option> 
+                                    <option>OM</option> 
+                                    <option>UK</option> 
+                                    <option>IT</option> 
+                                    <option>US</option> 
+                                    <option>PS</option> 
+                                    <option>EG</option> 
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">     
+                            <label for="add-project" class="col-sm-2 control-label">Project</label>
+                            <div class="col-sm-10">
+                            <input class="form-control" type="text" name="project"  id="add-project" value="Something" >
+                            </div>
+                        </div>
+                        <div class="form-group row">    
+                        <label for="IP" class="col-sm-2 control-label">IP</label>
+                        <div class="col-sm-10">
+                        <input class="form-control" type="text" name="ip" id="add-ip" value="10.1.1.1" >
+                          </div>
+                       </div>
+                        <div class="form-group row">     
+                        <label for="add-type" class="col-sm-2 control-label">Type</label>
+                        <div class="col-sm-10">
+                        <input class="form-control" type="text" name="type" id="add-type" value="Type">
+                          </div>
+                      </div>
+                        <div class="form-group row">     
+                        <label for="Access" class="col-sm-2 control-label">Access</label>
+                        <div class="col-sm-10">
+                        <input class="form-control" type="text" name="Access" id="add-access" value="Access">
+                          </div>
+                       </div>
+                        <div class="form-group row">    
+                        <label for="Username" class="col-sm-2 control-label">Username</label>
+                        <div class="col-sm-10">
+                        <input class="form-control" type="text" name="Username" id="add-username" value="Username" >
+                          </div>
+                       </div>
+                        <div class="form-group row">   
+                        <label for="password" class="col-sm-2 control-label">Password</label>
+                        <div class="col-sm-10">
+                        <input class="form-control" type="text" name="password" id="add-password" value="Password" >
+                          </div>
+                       </div>
+                        <div class="form-group row">     
+                        <label for="Enable" class="col-sm-2 control-label">Enable</label>
+                        <div class="col-sm-10">
+                        <input class="form-control" type="text" name="Enable" id="add-enable" value="Enable" >
+                          </div>
+                       </div>
+                        <div class="form-group row">    
+                        <label for="Backed Up" class="col-sm-2 control-label">BackedUp</label>
+                        <div class="col-sm-10">
+                        <input class="form-control" type="text" name="Backup" id="add-backup" value="Backedup" >
+                          </div>
+                      </div>
+                        <div class="form-group row">     
+                        <label for="Description" class="col-sm-2 control-label">Description</label>
+                        <div class="col-sm-10">
+                        <input class="form-control" type="text" name="Description" id="add-description" value="Description">
+                          </div>
+                       </div> 
+                        <div class="form-group row">     
+                        <label for="DMVPN" class="col-sm-2 control-label">DMVPN</label>
+                        <div class="col-sm-10">
+                        <input class="form-control" type="text" name="DMVPN" id="add-dmvpn" value="1" >
+                          </div>
+                        </div>  
+                      <!-- Allow form submission with keyboard without duplicating the dialog button -->
+                   
+                  </form>        
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"> Close </button>
+                <button type="button" id="add-submit-btn" class="btn btn-primary"> Submit </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+     </body>
+
+
+
+
+<script type="text/javascript" charset="utf8" src="//code.jquery.com/jquery-1.12.3.js"></script>
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
+<script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.js"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.css">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='src/jquery.contextMenu.css') }}"  />
+<script type="text/javascript" charset="utf8" src="{{ url_for('static', filename='src/jquery.contextMenu.js')}}"></script>
+<script type="text/javascript" charset="utf8" src="{{ url_for('static', filename='src/jquery.ui.position.js')}}"></script>
+<script type="text/javascript" charset="utf8" src="{{ url_for('static', filename='devices.js')}}"></script>
+<script type="text/javascript" charset="utf8" src="{{ url_for('static', filename='jquery-ui/jquery-ui.js')}}"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='jquery-ui/jquery-ui.css') }}">
+
+
+</html>
