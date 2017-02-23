@@ -36,7 +36,6 @@ try:
     
     @app.route('/add_devices', methods=['POST'])
     def add_devices():
-        if request.method == 'POST':
             print("Entering Addition hellhole")
             new_device=devicelist(
                 ip = request.form.get('ip'),
@@ -45,7 +44,7 @@ try:
                 enable = request.form.get('Enable'),
                 password =request.form.get('password'),
                 username =request.form.get('Username'),
-                access =request.form.get('Access'),
+                access =request.form.get('access'),
                 type = request.form.get('type'),
                 project =request.form.get('project'),
                 country =request.form.get('country'),
@@ -74,52 +73,7 @@ try:
             except IntegrityError:
                 print("Did not work")
                 return "False"    
-    # def personal_add_devices(callfromAddDevice):
-    #     print(callfromAddDevice)
-        
-    #         # MyDeviceForm = DeviceForm(request.POST)
-    #         # if MyDeviceForm.is_valid():
-    #         #     deviceip = MyDeviceForm.cleaned_data['ip']
-    #         #     devicecountry = MyDeviceForm.cleaned_data['country']
-    #         #     deviceproject = MyDeviceForm.cleaned_data['project']
-    #         #     devicetype = MyDeviceForm.cleaned_data['type']
-    #         #     deviceaccess = MyDeviceForm.cleaned_data['access']
-    #         #     deviceusername = MyDeviceForm.cleaned_data['username']
-    #         #     devicepassword = MyDeviceForm.cleaned_data['password']
-    #         #     deviceenable = MyDeviceForm.cleaned_data['enable']
-    #         #     devicebackedup = MyDeviceForm.cleaned_data['backedup']
-    #         #     devicedescription = MyDeviceForm.cleaned_data['description']
-    #         #     devicedmvpn = MyDeviceForm.cleaned_data['dmvpn']
-    #         #     new_device=devices(
-    #         #         ip = deviceip,
-    #         #         dmvpn= devicedmvpn,
-    #         #         description= devicedescription,
-    #         #         enable = deviceenable,
-    #         #         password =devicepassword,
-    #         #         username =deviceusername,
-    #         #         access =deviceaccess,
-    #         #         type =devicetype,
-    #         #         project =deviceproject,
-    #         #         country =devicecountry
-    #         #     )
-    #         #     new_device.save()
-    #     return "Done"
-    #             #result = list(devices.objects.all())
-    
-    #             #return render(request, 'devices.html', {"result": result})
-
-    # def delete_devices(request):
-    #     if request.method == 'POST':
-    #         instance = devices.objects.get(id=request.POST.get('id'))
-    #         instance.delete()
-    #         result = list(devices.objects.all())
-    #         return render(request, 'devices.html', {"result": result})
-    #     else:
-    #         result = list(devices.objects.all())
-    #         return render(request, 'devices.html', {"result": result})
-    
-    
-    #### THIS IS A FUNCTION NOT A VIEW####
+  
     def edit_devices(request):
         if request.method == 'POST':
             deviceip = request.POST.get('ip')

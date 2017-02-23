@@ -46,18 +46,31 @@ $(document).ready(function(){
         "pageLength":500,
          "createdRow": function( row, data, dataIndex ) {
                                       $(row).addClass( 'rows');
-                                      var columns = ["country","project","ip","type","access","username","password","enable","backedup","description","dmvpn"];
-                                      for(i=0;i<columns.length;i++)
-                                      {
-                                          row.childNodes[i].className = columns[i];
+                                      var columns = ["country","project","ip","type","access nEditable","username","password","enable","backedup","description","dmvpn"];
+                                      if(columns.length===row.childNodes.length){
+                                          for(i=0;i<columns.length;i++)
+                                          {
+                                              row.childNodes[i].className = columns[i];
+                                          } 
+                                          //$(".access").editable("destroy");
+                                          $(".nEditable").editable('toggle');
+
                                       }
+                                     
                                       
                                       
                                     }
     }
     );
-    $('.access').editable({
-        type: 'text',
+    
+// End of Stuff
+});
+
+
+
+$('.access').editable({
+        type: 'select',
+        source: ["SSH","Telnet","ASDM","Web"],
         url: 'edit_devices',
         send:'always',
         params: function(params) {
@@ -66,8 +79,7 @@ $(document).ready(function(){
         return item;
         }
         });
-// End of Stuff
-});
+
 
 
 
@@ -115,9 +127,6 @@ function addUser(form){
 
 function selectRowFromClick(htmlItem){
     var item =htmlItem[0].getElementsByClassName('ip');
-    
-    var itemParent = item[0].parentElement.getElementsByClassName('ip');
-    var rowIP = itemParent[0].innerText;
     var unparsedObject = item[0].parentElement.querySelectorAll('td');
     var objectDB = {};
     objectDB.country= unparsedObject[0].innerText;

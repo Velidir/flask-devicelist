@@ -18,5 +18,5 @@ class devicelist(db.Model):
     enable = db.Column(db.Text)
     backedup = db.Column(db.Text)
     description = db.Column(db.Text)
-    dmvpn = db.Column(db.Integer)
+    dmvpn = db.Column(db.Text)
     

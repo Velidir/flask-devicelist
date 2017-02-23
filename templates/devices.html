@@ -110,13 +110,27 @@
                         <div class="form-group row">     
                         <label for="add-type" class="col-sm-2 control-label">Type</label>
                         <div class="col-sm-10">
-                        <input class="form-control" type="text" name="type" id="add-type" value="Type">
+                        <select id="add-type" name="type" class="form-control" >  
+                                    <option>Data Router</option> 
+                                    <option>DMVPN Spoke</option> 
+                                    <option>DMVPN Hub</option> 
+                                    <option>Core Switch</option> 
+                                    <option>Access Switch</option> 
+                                    <option>ASA</option> 
+                                    <option>Riverbed</option> 
+                                    <option>Asterisk</option> 
+                        </select>
                           </div>
                       </div>
                         <div class="form-group row">     
-                        <label for="Access" class="col-sm-2 control-label">Access</label>
+                        <label for="access" class="col-sm-2 control-label">Access</label>
                         <div class="col-sm-10">
-                        <input class="form-control" type="text" name="Access" id="add-access" value="Access">
+                       <select id="add-access" name="access" class="form-control" >  
+                                    <option>SSH</option> 
+                                    <option>Telnet</option> 
+                                    <option>ASDM</option> 
+                                    <option>Web</option> 
+                        </select>
                           </div>
                        </div>
                         <div class="form-group row">    
@@ -152,7 +166,10 @@
                         <div class="form-group row">     
                         <label for="DMVPN" class="col-sm-2 control-label">DMVPN</label>
                         <div class="col-sm-10">
-                        <input class="form-control" type="text" name="DMVPN" id="add-dmvpn" value="1" >
+                          <select id="add-dmvpn" name="DMVPN" class="form-control" >  
+                                        <option>Yes</option> 
+                                        <option>No</option> 
+                          </select>
                           </div>
                         </div>  
                       <!-- Allow form submission with keyboard without duplicating the dialog button -->
