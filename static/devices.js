@@ -46,14 +46,13 @@ $(document).ready(function(){
         "pageLength":500,
          "createdRow": function( row, data, dataIndex ) {
                                       $(row).addClass( 'rows');
-                                      var columns = ["country","project","ip","type","access nEditable","username","password","enable","backedup","description","dmvpn"];
+                                      var columns = ["country","project","ip","type","access","username","password","enable","backedup","description","dmvpn"];
                                       if(columns.length===row.childNodes.length){
                                           for(i=0;i<columns.length;i++)
                                           {
                                               row.childNodes[i].className = columns[i];
                                           } 
-                                          //$(".access").editable("destroy");
-                                          $(".nEditable").editable('toggle');
+                                          $('td').css('border-bottom','none');
 
                                       }
                                      
@@ -62,13 +61,55 @@ $(document).ready(function(){
                                     }
     }
     );
-    
-// End of Stuff
 });
 
 
+$(document).on('click','td.country',function(){
+      $(this).editable({
+        type: 'text',
+        url: 'edit_devices',
+        send:'always',
+        params: function(params) {
+        var item = selectRowFromClick($(this));
+        item.access= params.value;
+        return item;
+        }
+        });
+    
+});
 
-$('.access').editable({
+$(document).on('click','td.project',function(){
+      $(this).editable({
+        type: 'text',
+        url: 'edit_devices',
+        send:'always',
+        params: function(params) {
+        var item = selectRowFromClick($(this));
+        item.access= params.value;
+        return item;
+        }
+        });
+    
+});
+
+$(document).on('click','td.type ',function(){
+      $(this).editable({
+        type: 'select',
+        source: ["DMVPN Spoke","DMVPN Hub","Core Switch","Access Switch","ASA","Riverbed","Asterisk"],
+        url: 'edit_devices',
+        send:'always',
+        params: function(params) {
+        var item = selectRowFromClick($(this));
+        item.access= params.value;
+        return item;
+        }
+        });
+    
+});
+
+
+$(document).on('click','td.access',function(){
+      $(this).editable({
         type: 'select',
         source: ["SSH","Telnet","ASDM","Web"],
         url: 'edit_devices',
@@ -79,6 +120,117 @@ $('.access').editable({
         return item;
         }
         });
+    
+});
+
+
+$(document).on('click','td.username',function(){
+      $(this).editable({
+        type: 'text',
+        url: 'edit_devices',
+        send:'always',
+        params: function(params) {
+        var item = selectRowFromClick($(this));
+        item.access= params.value;
+        return item;
+        }
+        });
+    
+});
+
+
+$(document).on('click','td.password',function(){
+      $(this).editable({
+        type: 'text',
+        url: 'edit_devices',
+        send:'always',
+        params: function(params) {
+        var item = selectRowFromClick($(this));
+        item.access= params.value;
+        return item;
+        }
+        });
+    
+});
+
+
+$(document).on('click','td.enable',function(){
+      $(this).editable({
+        type: 'text',
+        url: 'edit_devices',
+        send:'always',
+        params: function(params) {
+        var item = selectRowFromClick($(this));
+        item.access= params.value;
+        return item;
+        }
+        });
+    
+});
+
+
+
+
+$(document).on('click','td.backedup',function(){
+      $(this).editable({
+        type: 'text',
+        url: 'edit_devices',
+        send:'always',
+        params: function(params) {
+        var item = selectRowFromClick($(this));
+        item.access= params.value;
+        return item;
+        }
+        });
+    
+});
+
+$(document).on('click','td.description',function(){
+      $(this).editable({
+        type: 'text',
+        url: 'edit_devices',
+        send:'always',
+        params: function(params) {
+        var item = selectRowFromClick($(this));
+        item.access= params.value;
+        return item;
+        }
+        });
+    
+});
+
+$(document).on('click','td.dmvpn',function(){
+      $(this).editable({
+        type: 'select',
+        source: ["Yes","No"],
+        url: 'edit_devices',
+        send:'always',
+        params: function(params) {
+        var item = selectRowFromClick($(this));
+        item.access= params.value;
+        return item;
+        }
+        });
+    
+});
+
+
+// })
+// $('td.access').on('click', function() {
+
+// });
+
+// $('.access').editable({
+//         type: 'select',
+//         source: ["SSH","Telnet","ASDM","Web"],
+//         url: 'edit_devices',
+//         send:'always',
+//         params: function(params) {
+//         var item = selectRowFromClick($(this));
+//         item.access= params.value;
+//         return item;
+//         }
+//         });
 
 
 
@@ -126,8 +278,8 @@ function addUser(form){
 }
 
 function selectRowFromClick(htmlItem){
-    var item =htmlItem[0].getElementsByClassName('ip');
-    var unparsedObject = item[0].parentElement.querySelectorAll('td');
+    var item =htmlItem[0];
+    var unparsedObject = item.parentElement.querySelectorAll('td');
     var objectDB = {};
     objectDB.country= unparsedObject[0].innerText;
     objectDB.project= unparsedObject[1].innerText;
