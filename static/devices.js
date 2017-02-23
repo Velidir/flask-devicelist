@@ -5,9 +5,11 @@ $("#add-submit-btn").on("click",function(){
     //Serialize the form into an array of objects
     var formOutput = $("#add-device-form").serializeArray();
     //Enter DataTable
-    
-    var addResult=false;
-    $.ajax({
+    var ipFromForm = $('#add-ip').val();
+    if(ValidateIPaddress(ipFromForm)===true)
+    {
+        var addResult=false;
+        $.ajax({
                       type: "POST",
                       url: 'add_devices',
                       data: formOutput,
@@ -35,11 +37,37 @@ $("#add-submit-btn").on("click",function(){
                           }
                       }
                       
-                    });
+                    });    
+    }
+    else
+    {
+        //alert("IP is not valid!");
+        $('#add-ip').addClass("text-error");
+        $('#add-ip').val("IP is not Valid!");
+        
+    }
+    
     
        
     
 });
+// $('#add-device-form').validate({
+
+
+//     submitHandler: function(form) {
+//         $.ajax({
+//             url: form.action,
+//             type: form.method,
+//             data: $(form).serialize(),
+//             success: function(response) {
+//                 return "True";
+//             }            
+//         });
+//     }
+// });
+
+
+
 
 $(document).ready(function(){
     $('#example').DataTable( {
