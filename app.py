@@ -61,12 +61,9 @@ try:
     @app.route('/edit_devices', methods=['POST'])
     def edit_devices():
         editableDevice=devicelist.query.filter_by(ip=request.form.get('ip')).first()
-        print(editableDevice.dmvpn)
         changedIP = request.form.get('changedIP')
-        print(changedIP)
-        if(request.form.get('changedIP') == None):
-            print("wewe")
-            #editableDevice.ip = request.form.get('changedIP')
+        if(request.form.get('changedIP') != None):
+            editableDevice.ip = request.form.get('changedIP')
         editableDevice.dmvpn = request.form.get('dmvpn')
         editableDevice.country = request.form.get('country')
         editableDevice.project = request.form.get('project')
