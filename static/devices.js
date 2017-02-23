@@ -63,10 +63,10 @@ $(document).ready(function(){
     );
 });
 
-
-$(document).on('click','td.country',function(){
+$(document).on('click','td.country ',function(){
       $(this).editable({
-        type: 'text',
+        type: 'select',
+        source:populateArrayFromHTML($('#add-country')),
         url: 'edit_devices',
         send:'always',
         params: function(params) {
@@ -77,6 +77,7 @@ $(document).on('click','td.country',function(){
         });
     
 });
+
 
 $(document).on('click','td.project',function(){
       $(this).editable({
@@ -94,22 +95,41 @@ $(document).on('click','td.project',function(){
 
 $(document).on('click','td.ip',function(){
       $(this).editable({
-        type: 'text',
-        url: 'edit_devices',
-        send:'always',
-        params: function(params) {
-        var item = selectRowFromClick($(this));
-        item.changedIP= params.value;
-        return item;
-        }
+            type: 'text',
+            url: 'edit_devices',
+            send:'always',
+            params: function(params) {
+                    var item = selectRowFromClick($(this));
+                    item.changedIP = params.value;
+                    return item;            
+                    
+            },
+            validate: function(value) {
+                if(ValidateIPaddress(value)===false)
+                {
+                    return "You have entered an invalid IP address!";
+                }
+                else{
+                    var ipList= $('td.ip');
+                        for(i=0;i < ipList.length;i++)
+                        {
+                            if(value===ipList[i].innerText){
+                                return "This IP already exists";
+                            }           
+                        }
+                
+                }
+            }
+        
+        
         });
     
 });
-
+//source: ["DMVPN Spoke","DMVPN Hub","Core Switch","Access Switch","ASA","Riverbed","Asterisk"],
 $(document).on('click','td.type ',function(){
       $(this).editable({
         type: 'select',
-        source: ["DMVPN Spoke","DMVPN Hub","Core Switch","Access Switch","ASA","Riverbed","Asterisk"],
+        source: populateArrayFromHTML($('#add-type')),
         url: 'edit_devices',
         send:'always',
         params: function(params) {
@@ -125,7 +145,7 @@ $(document).on('click','td.type ',function(){
 $(document).on('click','td.access',function(){
       $(this).editable({
         type: 'select',
-        source: ["SSH","Telnet","ASDM","Web"],
+        source: populateArrayFromHTML($('#add-access')),
         url: 'edit_devices',
         send:'always',
         params: function(params) {
@@ -229,25 +249,6 @@ $(document).on('click','td.dmvpn',function(){
 });
 
 
-// })
-// $('td.access').on('click', function() {
-
-// });
-
-// $('.access').editable({
-//         type: 'select',
-//         source: ["SSH","Telnet","ASDM","Web"],
-//         url: 'edit_devices',
-//         send:'always',
-//         params: function(params) {
-//         var item = selectRowFromClick($(this));
-//         item.access= params.value;
-//         return item;
-//         }
-//         });
-
-
-
 
 $.contextMenu({
     selector: '.rows',
@@ -286,10 +287,6 @@ $.contextMenu({
 $('td').css('border-bottom','none');
 
 ////////Start of functions for the Script
-function addUser(form){
-    console.log(form);
-    
-}
 
 function selectRowFromClick(htmlItem){
     var item =htmlItem[0];
@@ -309,3 +306,22 @@ function selectRowFromClick(htmlItem){
     return objectDB;
 }
 
+function ValidateIPaddress(ipaddress) 
+{
+ if (/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(ipaddress))
+  {
+    return (true);
+  }
+return (false);
+}
+
+function populateArrayFromHTML(jQueryArray){
+    var tempVar= jQueryArray[0];
+    jQueryArray = tempVar.options;
+    var returnArray = [];
+    for(i=0;i < jQueryArray.length;i++)
+    {
+        returnArray[i] = jQueryArray[i].innerText;
+    }
+    return returnArray;
+}
