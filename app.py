@@ -7,22 +7,7 @@ try:
     def hello_world():
         return 'Hello, World!'
 
-    #@app.route('/get_ip')
-    # def get_ip(request):
-    # 	result = "Switch IP is invalid"
-    # 	print ("step 1")
-    # 	if request.method == 'POST':
-    # 		MyIPform = IPForm(request.POST)
-    # 		print ("step 2")
-    # 		if MyIPform.is_valid():
-    # 			 SWIPform = MyIPform.cleaned_data['yourip']
-    # 			 print ("Valid IP")
-    # 			 result = getSW(SWIPform)
-    			 			 
-    # 	else:
-    # 		MyIPform = IPForm()
-    # 	return render(request, 'ip.html',{"result": result })
-    
+
     @app.route('/show_devices', methods=['GET', 'POST'])
     def show_devices():
         if request.method == 'POST':
@@ -73,39 +58,34 @@ try:
             except IntegrityError:
                 print("Did not work")
                 return "False"    
-  
-    def edit_devices(request):
-        if request.method == 'POST':
-            deviceip = request.POST.get('ip')
-            devicecountry = request.POST.get('country')
-            deviceproject = request.POST.get('project')
-            devicetype = request.POST.get('type')
-            deviceaccess =request.POST.get('access')
-            deviceusername = request.POST.get('username')
-            devicepassword = request.POST.get('password')
-            deviceenable = request.POST.get('enable')
-            devicebackedup = request.POST.get('backedup')
-            devicedescription = request.POST.get('description')
-            devicedmvpn = request.POST.get('dmvpn')
-            new_device=devicelist(
-                id = request.POST.get('id'),
-                ip = deviceip,
-                dmvpn= devicedmvpn,
-                description= devicedescription,
-                enable = deviceenable,
-                password =devicepassword,
-                username =deviceusername,
-                access =deviceaccess,
-                type =devicetype,
-                project =deviceproject,
-                country =devicecountry
-            )
-            #add the new device here
-            db.session.add(new_device)
+    @app.route('/edit_devices', methods=['POST'])
+    def edit_devices():
+        editableDevice=devicelist.query.filter_by(ip=request.form.get('ip')).first()
+        print(editableDevice.dmvpn)
+        changedIP = request.form.get('changedIP')
+        print(changedIP)
+        if(request.form.get('changedIP') == None):
+            print("wewe")
+            #editableDevice.ip = request.form.get('changedIP')
+        editableDevice.dmvpn = request.form.get('dmvpn')
+        editableDevice.country = request.form.get('country')
+        editableDevice.project = request.form.get('project')
+        editableDevice.type = request.form.get('type')
+        editableDevice.access =request.form.get('access')
+        editableDevice.username = request.form.get('username')
+        editableDevice.password = request.form.get('password')
+        editableDevice.enable = request.form.get('enable')
+        editableDevice.backedup = request.form.get('backedup')
+        editableDevice.description = request.form.get('description')
+        #add the new device here
+        try:
             db.session.commit()
-            # return the new device here
-            result = devicelist.query.all()
-            return result
+            print("Edit Worked")
+            return "True"
+        # return the new device here
+        except IntegrityError:
+            print("Edit Failed")
+            return "False"
 
 except ValueError:
     print("there was an error here" + ValueError)

@@ -71,7 +71,7 @@ $(document).on('click','td.country',function(){
         send:'always',
         params: function(params) {
         var item = selectRowFromClick($(this));
-        item.access= params.value;
+        item.country= params.value;
         return item;
         }
         });
@@ -85,7 +85,21 @@ $(document).on('click','td.project',function(){
         send:'always',
         params: function(params) {
         var item = selectRowFromClick($(this));
-        item.access= params.value;
+        item.project= params.value;
+        return item;
+        }
+        });
+    
+});
+
+$(document).on('click','td.ip',function(){
+      $(this).editable({
+        type: 'text',
+        url: 'edit_devices',
+        send:'always',
+        params: function(params) {
+        var item = selectRowFromClick($(this));
+        item.changedIP= params.value;
         return item;
         }
         });
@@ -100,7 +114,7 @@ $(document).on('click','td.type ',function(){
         send:'always',
         params: function(params) {
         var item = selectRowFromClick($(this));
-        item.access= params.value;
+        item.type= params.value;
         return item;
         }
         });
@@ -131,7 +145,7 @@ $(document).on('click','td.username',function(){
         send:'always',
         params: function(params) {
         var item = selectRowFromClick($(this));
-        item.access= params.value;
+        item.username= params.value;
         return item;
         }
         });
@@ -146,7 +160,7 @@ $(document).on('click','td.password',function(){
         send:'always',
         params: function(params) {
         var item = selectRowFromClick($(this));
-        item.access= params.value;
+        item.password= params.value;
         return item;
         }
         });
@@ -161,7 +175,7 @@ $(document).on('click','td.enable',function(){
         send:'always',
         params: function(params) {
         var item = selectRowFromClick($(this));
-        item.access= params.value;
+        item.enable= params.value;
         return item;
         }
         });
@@ -178,7 +192,7 @@ $(document).on('click','td.backedup',function(){
         send:'always',
         params: function(params) {
         var item = selectRowFromClick($(this));
-        item.access= params.value;
+        item.backedup= params.value;
         return item;
         }
         });
@@ -192,7 +206,7 @@ $(document).on('click','td.description',function(){
         send:'always',
         params: function(params) {
         var item = selectRowFromClick($(this));
-        item.access= params.value;
+        item.description= params.value;
         return item;
         }
         });
@@ -207,7 +221,7 @@ $(document).on('click','td.dmvpn',function(){
         send:'always',
         params: function(params) {
         var item = selectRowFromClick($(this));
-        item.access= params.value;
+        item.dmvpn= params.value;
         return item;
         }
         });
