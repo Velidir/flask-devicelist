@@ -42,7 +42,7 @@ $("#add-submit-btn").on("click",function(){
     else
     {
         //alert("IP is not valid!");
-        $('#add-ip').addClass("text-error");
+        $('#add-ip').addClass("has-error");
         $('#add-ip').val("IP is not Valid!");
         
     }
